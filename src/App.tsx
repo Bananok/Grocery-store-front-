@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
 
-function App() {
+import { Header } from "components";
+import { Auth, Basket, History, Products } from "pages";
+import { Route, Routes } from "react-router-dom";
+import { actions, useAppDispatch } from "store";
+import styled from "styled-components";
+
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(actions.products.getProducts());
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Root>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Products />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/basket" element={<Basket />} />
+        <Route path="/history" element={<History />} />
+      </Routes>
+    </Root>
   );
-}
+};
 
 export default App;
+
+const Root = styled.div`
+  min-height: 100vh;
+`;
