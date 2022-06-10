@@ -1,7 +1,7 @@
 import axios from "axios";
 import { actions, store } from "store";
 
-export const BASE_URL = "http://localhost:8000/";
+export const BASE_URL = "https://lovely-product-store.herokuapp.com/";
 
 export const api = axios.create({
   baseURL: BASE_URL,
